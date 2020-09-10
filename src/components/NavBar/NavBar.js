@@ -1,31 +1,27 @@
 import React, { Component } from 'react'
+import { NavLink } from "react-router-dom";
 import { Button, Menu } from 'semantic-ui-react'
 import './NavBar.css'
 
 export default class NavMenu extends Component {
-  state = { activeItem: 'home' }
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const { activeItem } = this.state
-
     return (
       <Menu>
         <Menu.Item
           name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
+          as={NavLink}
+          exact to='/'
         />
         <Menu.Item
           name='password generator'
-          active={activeItem === 'password generator'}
-          onClick={this.handleItemClick}
+          as={NavLink}
+          to="/passwordgenerator"
         />
         <Menu.Item
           name='json formatter'
-          active={activeItem === 'json formatter'}
-          onClick={this.handleItemClick}
+          as={NavLink}
+          to='/jsonformatter'
         />
 
         <Menu.Menu position='right'>
