@@ -1,88 +1,191 @@
-import React, { Component } from 'react'
+import _ from "lodash";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Menu, Dropdown } from 'semantic-ui-react'
+import {
+  Container,
+  Icon,
+  Image,
+  Menu,
+  Sidebar,
+  Responsive,
+  Dropdown
+} from "semantic-ui-react";
 import './NavBar.css'
 
-const menuItems = [
-  { id: 1, title: 'Home', link: '/' },
-  { id: 3, title: 'Json Formatter', link: '/jsonformatter' },
-  { id: 3, title: 'URL Shortener', link: '/urlshortener' },
-  { id: 4, title: 'Security Tools', link: '/security', dropdown: [
-    { id: 4.1, title: 'Password Generator', link: '/passwordgenerator' },
-    { id: 4.2, title: 'Security Headers', link: '/securityheaders' }
+const NavBarDropdown = ({
+  dropdownItems,
+  id,
+  text,
+  to
+}) => (
+  <Dropdown 
+    key={id}
+    item 
+    text={text}
+    as={NavLink}
+    exact= {to === '/' ? true : false} 
+    to={to}
+    onClick={e => e.preventDefault()}>
+   <Dropdown.Menu>
+     {
+       dropdownItems.map((dropdownItem) => 
+        <Dropdown.Item
+         key={dropdownItem.key}
+         as={NavLink}
+         exact= { dropdownItem.to === '/' ? true : false } 
+         to={to + dropdownItem.to}>
+           { dropdownItem.content }
+         </Dropdown.Item>
+      )
+     }
+   </Dropdown.Menu>
+  </Dropdown>
+);
+
+const NavBarMobile = ({
+  children,
+  leftItems,
+  onPusherClick,
+  onToggle,
+  rightItems,
+  visible
+}) => (
+  <Sidebar.Pushable>
+    <Sidebar
+      as={Menu}
+      animation="overlay"
+      icon="labeled"
+      vertical
+      visible={visible}
+      width='thin'
+    >
+     {_.map(leftItems, item => item.dropdown ? 
+      <NavBarDropdown 
+        dropdownItems={item.dropdown}
+        key={item.key}
+        text={item.content}
+        to={item.to}
+      /> 
+      : 
+      <Menu.Item {...item} />)
+      }
+    </Sidebar>
+    <Sidebar.Pusher
+      dimmed={visible}
+      onClick={onPusherClick}
+      style={{ minHeight: "100vh" }}
+    >
+      <Menu fixed="top">
+        <Menu.Item>
+          <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+        </Menu.Item>
+        <Menu.Item onClick={onToggle}>
+          <Icon name="sidebar" />
+        </Menu.Item>
+        <Menu.Menu position="right">
+          {_.map(rightItems, item => <Menu.Item {...item} />)}
+        </Menu.Menu>
+      </Menu>
+      {children}
+    </Sidebar.Pusher>
+  </Sidebar.Pushable>
+);
+
+const NavBarDesktop = ({ leftItems, rightItems }) => (
+  <Menu fixed="top">
+    <Menu.Item>
+      <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+    </Menu.Item>
+
+    {_.map(leftItems, item => item.dropdown ? 
+      <NavBarDropdown 
+        dropdownItems={item.dropdown}
+        key={item.key}
+        text={item.content}
+        to={item.to}
+      /> 
+      : 
+      <Menu.Item {...item} />)
+    }
+
+    <Menu.Menu position="right">
+      {_.map(rightItems, item => item.dropdown ? 
+        <NavBarDropdown 
+          dropdownItems={item.dropdown}
+          key={item.key}
+          text={item.content}
+          to={item.to}
+        /> 
+        : 
+        <Menu.Item {...item} />)
+      }
+    </Menu.Menu>
+  </Menu>
+);
+
+const NavBarChildren = ({ children }) => (
+  <Container style={{ marginTop: "5em" }}>{children}</Container>
+);
+
+class ResponsiveNavBar extends Component {
+  state = {
+    visible: false
+  };
+
+  handlePusher = () => {
+    const { visible } = this.state;
+
+    if (visible) this.setState({ visible: false });
+  };
+
+  handleToggle = () => this.setState({ visible: !this.state.visible });
+
+  render() {
+    const { children, leftItems, rightItems } = this.props;
+    const { visible } = this.state;
+
+    return (
+      <div>
+        <Responsive {...Responsive.onlyMobile}>
+          <NavBarMobile
+            leftItems={leftItems}
+            onPusherClick={this.handlePusher}
+            onToggle={this.handleToggle}
+            rightItems={rightItems}
+            visible={visible}
+          >
+            <NavBarChildren>{children}</NavBarChildren>
+          </NavBarMobile>
+        </Responsive>
+        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+          <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
+          <NavBarChildren>{children}</NavBarChildren>
+        </Responsive>
+      </div>
+    );
+  }
+}
+
+const leftItems = [
+  { as: NavLink, content: "Home", exact: true, to: '/', key: "home" },
+  { as: NavLink, content: "Json Formatter", to: '/jsonformatter', key: "jsongormatter" },
+  { as: NavLink, content: "URL Shortener", to: '/urlshortener', key: "urlshortener" },
+  { as: NavLink, content: "Security Tools", to: '/security', key: "security", dropdown: [
+    { as: NavLink, content: 'Password Generator', to: '/passwordgenerator', key: "passwordgenerator" },
+    { as: NavLink, content: 'Security Headers', to: '/securityheaders', key: "securityheaders" }
   ]}
 ];
-
-function DropdownMenuItems(props) {
-
-  const dropdown = props.item.dropdown.map((dropdownItem) => 
-    <Dropdown.Item
-      key={dropdownItem.id}
-      as={NavLink}
-      exact= { dropdownItem.link === '/' ? true : false } 
-      to={props.item.link + dropdownItem.link}>
-        { dropdownItem.title }
-      </Dropdown.Item>
-  );
-
-  return (
-    <Dropdown 
-      key={ props.item.id }
-      item 
-      text={ props.item.title }
-      as={NavLink}
-      exact= { props.item.link === '/' ? true : false } 
-      to={ props.item.link }
-      onClick={e => e.preventDefault()}
-      >
-       <Dropdown.Menu>
-        { dropdown }
-       </Dropdown.Menu>
-    </Dropdown>
-  )
-
-}
-
-function NavMenuItems(props) {
-  
-  const menu = props.items.map((menuItem) => {
-    return  menuItem.dropdown ?
-      <DropdownMenuItems item={ menuItem } /> 
-      : 
-      <Menu.Item
-        key={menuItem.id}
-        name={menuItem.title}
-        as={NavLink}
-        exact= { menuItem.link === '/' ? true : false } 
-        to={menuItem.link}
-      />
-  });
-
-  return (
-    <Menu>
-      { menu }
-    </Menu>
-  )
-
-}
+const rightItems = [
+  { as: NavLink, content: "Login", to: '/login', key: "login" },
+  { as: NavLink, content: "Register", to: '/register', key: "register" }
+];
 
 export default class NavMenu extends Component {
 
   render() {
     return (
-      <Menu>
-        <NavMenuItems items={ menuItems } />
-
-        <Menu.Menu position='right'>
-            <Menu.Item>
-            <Button>Log In</Button>
-          </Menu.Item>
-
-          <Menu.Item>
-            <Button primary>Sign Up</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+      <ResponsiveNavBar leftItems={leftItems} rightItems={rightItems} />
     )
   }
-}
+
+};

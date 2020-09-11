@@ -1,3 +1,7 @@
 .ui.menu {
     border: none !important;
 }
+
+.ui.sidebar.menu {
+    overflow: visible !important;
+}
