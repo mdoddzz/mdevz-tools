@@ -6,17 +6,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <NavBar />
-        </header>
+        <NavBar>
 
-        <main>
-          {this.props.children}
-        </main>
+          <main>
+            {this.props.children}
+          </main>
 
-        <footer>
-          Your copyright message
-        </footer>
+          <footer>
+            This is the footer
+          </footer>
+
+        </NavBar>
       </div>
     );
   }

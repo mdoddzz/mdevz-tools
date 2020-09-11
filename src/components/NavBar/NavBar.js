@@ -59,6 +59,14 @@ const NavBarMobile = ({
       visible={visible}
       width='thin'
     >
+      <Menu.Item
+        as={NavLink} 
+        exact
+        to='/'
+        key="home">
+        <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+        <h4>mDevz Tools</h4>
+      </Menu.Item>
      {_.map(leftItems, item => item.dropdown ? 
       <NavBarDropdown 
         dropdownItems={item.dropdown}
@@ -76,7 +84,11 @@ const NavBarMobile = ({
       style={{ minHeight: "100vh" }}
     >
       <Menu fixed="top">
-        <Menu.Item>
+        <Menu.Item
+         as={NavLink} 
+         exact
+         to='/'
+         key="home">
           <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
         </Menu.Item>
         <Menu.Item onClick={onToggle}>
@@ -93,7 +105,12 @@ const NavBarMobile = ({
 
 const NavBarDesktop = ({ leftItems, rightItems }) => (
   <Menu fixed="top">
-    <Menu.Item>
+    <Menu.Item 
+      as={NavLink} 
+      content="Home"
+      exact
+      to='/'
+      key="home">
       <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
     </Menu.Item>
 
@@ -167,7 +184,6 @@ class ResponsiveNavBar extends Component {
 }
 
 const leftItems = [
-  { as: NavLink, content: "Home", exact: true, to: '/', key: "home" },
   { as: NavLink, content: "Json Formatter", to: '/jsonformatter', key: "jsongormatter" },
   { as: NavLink, content: "URL Shortener", to: '/urlshortener', key: "urlshortener" },
   { as: NavLink, content: "Security Tools", to: '/security', key: "security", dropdown: [
@@ -184,7 +200,9 @@ export default class NavMenu extends Component {
 
   render() {
     return (
-      <ResponsiveNavBar leftItems={leftItems} rightItems={rightItems} />
+      <ResponsiveNavBar leftItems={leftItems} rightItems={rightItems}>
+        {this.props.children}
+      </ResponsiveNavBar>
     )
   }
 

@@ -5,3 +5,12 @@
 .ui.sidebar.menu {
     overflow: visible !important;
 }
+
+.ui.sidebar.menu .ui.image {
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.ui.sidebar.menu h4 {
+    margin-top: 10px;
+}
