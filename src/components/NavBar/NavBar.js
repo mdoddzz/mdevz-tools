@@ -84,7 +84,7 @@ const NavBarMobile = ({
     >
       <Menu fixed="top">
         <Menu.Item
-         as={NavLink} 
+         as={Link} 
          exact
          to='/'
          key="home">
