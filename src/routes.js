@@ -11,7 +11,7 @@ const Routes = () => {
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
       <Route exact path='/' component={MainPage}></Route>
-      <Route exact path='/passwordgenerator' component={PasswordGeneratorPage}></Route>
+      <Route exact path='/security/passwordgenerator' component={PasswordGeneratorPage}></Route>
     </Switch>
   );
 }
