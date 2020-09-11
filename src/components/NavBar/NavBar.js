@@ -1,6 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import logo from "../../images/mdevz-icon-purple.svg";
 import {
   Icon,
   Image,
@@ -63,7 +64,7 @@ const NavBarMobile = ({
         exact
         to='/'
         key="home">
-        <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+        <Image size="mini" src={logo} />
         <h4>mDevz Tools</h4>
       </Menu.Item>
      {_.map(leftItems, item => item.dropdown ? 
@@ -88,7 +89,7 @@ const NavBarMobile = ({
          exact
          to='/'
          key="home">
-          <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+          <Image size="mini" src={logo} />
         </Menu.Item>
         <Menu.Item onClick={onToggle}>
           <Icon name="sidebar" />
@@ -109,7 +110,7 @@ const NavBarDesktop = ({ leftItems, rightItems }) => (
       exact
       to='/'
       key="home">
-      <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+      <Image size="mini" src={logo} />
     </Menu.Item>
 
     {_.map(leftItems, item => item.dropdown ? 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './HomePage.css';
+import logo from '../../images/mdevz-tools-logo-white.svg'
 import image1 from '../../images/undraw_code_review_l1q9.svg'
 import image2 from '../../images/undraw_link_shortener_mvf6.svg'
 import {
@@ -67,11 +68,9 @@ export default class HomePage extends Component {
     return (
       <div>
       <Container text style={{ marginTop: '7em' }}>
-        <Image centered size="small" src="https://react.semantic-ui.com/logo.png" />
+        <Image centered size="medium" src={logo} />
         <Header as='h1'>About</Header>
         <p>This is a collection of useful developer/ web tools. Designed to simplify some basic tasks completed as a developer.</p>
-
-        <p>Put buttone here that match colours like [general] and [security] (red) that will filter the list shown. Use onclick events with classNames to filter out and make sure to put a reset button and a way to show which filter is active</p>
 
         <Header as="h5">Filter Tools:</Header>
 

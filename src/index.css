@@ -14,4 +14,15 @@ code {
 
 #root {
   overflow: auto;
+  background: rgb(32,11,55);
+  background: -moz-linear-gradient(-45deg, rgba(32,11,55,1) 0%, rgba(202,55,130,1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(32,11,55,1) 0%,rgba(202,55,130,1) 100%);
+  background: linear-gradient(135deg, rgba(32,11,55,1) 0%,rgba(202,55,130,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#200b37', endColorstr='#ca3782',GradientType=1 );
+  color: #fff;
+  background-attachment: fixed;
+}
+
+h1.ui.header, h2.ui.header, h3.ui.header, h4.ui.header, h5.ui.header {
+  color: #fff;
 }
