@@ -55,7 +55,7 @@ const CardDesktopGroup = () => <Card.Group itemsPerRow="3" items={items} />
 const CardMobileGroup = () => <Card.Group itemsPerRow="1" centered items={items} />
 
 const FilterButtons = () => (
-  <Button.Group children="Filter:" buttons={[
+  <Button.Group buttons={[
     { content: 'General', color: 'teal' }, 
     { content: 'Security', color: 'red' }, 
     { content: 'All', disabled: true }, 
