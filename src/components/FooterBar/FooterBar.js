@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
+import logo from "../../images/mdevz-icon-white.svg";
 import {
     Divider,
     Image,
@@ -46,7 +47,7 @@ export default class FooterBar extends Component {
             </Grid>
     
             <Divider inverted section />
-            <Image centered size="mini" src="https://react.semantic-ui.com/logo.png" />
+            <Image centered size="mini" src={logo} />
             <List horizontal inverted divided link size='small'>
                 <List.Item as={Link}>
                 Site Map
