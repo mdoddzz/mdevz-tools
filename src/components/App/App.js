@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavBar } from '../';
+import { NavBar, FooterBar } from '../';
 import './App.css';
 
 class App extends Component {
@@ -12,10 +12,8 @@ class App extends Component {
             {this.props.children}
           </main>
 
-          <footer>
-            This is the footer
-          </footer>
-
+          <FooterBar />
+          
         </NavBar>
       </div>
     );

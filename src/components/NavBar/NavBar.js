@@ -141,7 +141,7 @@ const NavBarDesktop = ({ leftItems, rightItems }) => (
 );
 
 const NavBarChildren = ({ children }) => (
-  <Container style={{ marginTop: "5em" }}>{children}</Container>
+  <div>{children}</div>
 );
 
 class ResponsiveNavBar extends Component {
