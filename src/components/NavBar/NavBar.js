@@ -1,8 +1,7 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
-  Container,
   Icon,
   Image,
   Menu,
@@ -60,7 +59,7 @@ const NavBarMobile = ({
       width='thin'
     >
       <Menu.Item
-        as={NavLink} 
+        as={Link} 
         exact
         to='/'
         key="home">
@@ -106,8 +105,7 @@ const NavBarMobile = ({
 const NavBarDesktop = ({ leftItems, rightItems }) => (
   <Menu fixed="top">
     <Menu.Item 
-      as={NavLink} 
-      content="Home"
+      as={Link} 
       exact
       to='/'
       key="home">
