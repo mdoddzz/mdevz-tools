@@ -1,0 +1,21 @@
+.ui.form.default label {
+    color: #fff !important;
+}
+
+.ui.form.default .inline.field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui.form.default .inline.field > * {
+    width: 50% !important;
+}
+
+.ui.form.default .inline.field label {
+    text-align: right;
+}
+
+.ui.form.default .ui.selection.dropdown {
+    min-width: 0;
+}

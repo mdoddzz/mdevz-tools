@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './FormContainer.css'
 import {
     Form,
     Message
@@ -7,7 +8,7 @@ import {
 export default class FormContainer extends Component {
     render() {
       return (
-        <Form>
+        <Form className="default">
             <Message
                 error
                 header='Action Forbidden'
