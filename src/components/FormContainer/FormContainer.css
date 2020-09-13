@@ -19,3 +19,7 @@
 .ui.form.default .ui.selection.dropdown {
     min-width: 0;
 }
+
+.ui.toggle.checkbox .box:before, .ui.toggle.checkbox label:before {
+    background: rgb(0 0 0 / 31%) !important;
+}

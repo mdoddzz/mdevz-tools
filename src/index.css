@@ -26,3 +26,7 @@ code {
 h1.ui.header, h2.ui.header, h3.ui.header, h4.ui.header, h5.ui.header {
   color: #fff;
 }
+
+.ui.segment {
+  color: #4b4b4b;
+}
