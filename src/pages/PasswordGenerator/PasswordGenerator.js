@@ -8,7 +8,8 @@ import {
   Checkbox,
   Button,
   Message,
-  Segment
+  Segment,
+  Divider
 } from 'semantic-ui-react'
 
 const lengthOptions = []
@@ -133,9 +134,11 @@ export default class PasswordGenerator extends Component {
             </Form.Field>
             <Button 
                 onClick={this.generatePassword}
+                floated='right'
                 >
-                Submit
+                Generate Password
             </Button>
+            <Divider clearing hidden />
             {[...passwordList].reverse().map((password, index) => 
               <div>
                 <Message
