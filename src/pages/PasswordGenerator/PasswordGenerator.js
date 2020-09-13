@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormContainer } from '../../components'
+import { FormContainer, PasswordMessage } from '../../components'
 import './PasswordGenerator.css'
 import {
   Container,
@@ -7,8 +7,6 @@ import {
   Dropdown,
   Checkbox,
   Button,
-  Message,
-  Segment,
   Divider
 } from 'semantic-ui-react'
 
@@ -140,24 +138,10 @@ export default class PasswordGenerator extends Component {
             </Button>
             <Divider clearing hidden />
             {[...passwordList].reverse().map((password, index) => 
-              <div>
-                <Message
-                  onDismiss={(e)=>{
-                    e.stopPropagation();
-                    e.preventDefault();
-                    this.handleDismiss(password.id);
-                  }}
-                  attached="top"
-                  icon="user secret"
-                  key={password.id}
-                  header='Your password is:'
-                  content={password.password}
-                />
-                <Segment attached="bottom" size="mini">
-                  <b>Generated at:</b> {password.generated}<br />
-                  <b>Settings: </b>
-                </Segment>
-              </div>
+              <PasswordMessage 
+                parent={this}
+                password={password} 
+              />
             )}
           </FormContainer>
       </Container>
