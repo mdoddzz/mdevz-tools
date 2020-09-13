@@ -1,7 +1,11 @@
 .App {
-  text-align: center;
+
 }
 
 .App-header {
 
+}
+
+.ui.header {
+  text-align: center;
 }

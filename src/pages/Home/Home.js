@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import './HomePage.css';
+import './Home.css';
+import { Link } from "react-router-dom";
 import logo from '../../images/mdevz-tools-logo-white.svg'
-import image1 from '../../images/undraw_code_review_l1q9.svg'
-import image2 from '../../images/undraw_link_shortener_mvf6.svg'
+import jsonImage from '../../images/homeIcons/jsonformatter.png'
+import passwordImg from '../../images/homeIcons/passwordgenerator.png'
+import securityImg from '../../images/homeIcons/securityheaders.png'
+import urlImage from '../../images/homeIcons/urlshortener.png'
 import {
   Container,
   Header,
@@ -18,8 +21,9 @@ const items = [
     description:
       'Format json string to how you require',
     meta: 'v1.2',
-    image: image1,
-    href: "/jsonformatter",
+    image: jsonImage,
+    as: Link,
+    to: "/jsonformatter",
     color: "teal"
   },
   {
@@ -27,8 +31,9 @@ const items = [
     description:
       'Create short urls for when characters are limited or you want a sleeker looking url.',
     meta: 'v1',
-    image: image2,
-    href: "/urlshortener",
+    image: urlImage,
+    as: Link,
+    to: "/urlshortener",
     color: "teal"
   },
   {
@@ -36,8 +41,9 @@ const items = [
     description:
       'Create a secure password with adjustable settings',
     meta: 'v1',
-    image: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
-    href: "/security/passwordgenerator",
+    image: passwordImg,
+    as: Link,
+    to: "/security/passwordgenerator",
     color: "red"
   },
   {
@@ -45,8 +51,9 @@ const items = [
     description:
       'Check the security headers of your website and see where security could be improved',
     meta: 'v1',
-    image: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
-    href: "/security/securityheaders",
+    image: securityImg,
+    as: Link,
+    to: "/security/securityheaders",
     color: "red"
   },
 ]
