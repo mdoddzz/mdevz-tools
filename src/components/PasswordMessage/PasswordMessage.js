@@ -70,7 +70,7 @@ export default class PasswordMessage extends Component {
                 <Icon name='user secret' />
                 <Message.Content>
                     <Message.Header>Your password is:</Message.Header>
-                    <Input className="PasswordOutput" readonly value={this.props.password.password} ref={this.passwordInput} type={this.state.passwordHidden ? 'password' : 'text'}/>
+                    <Input className="PasswordOutput" readOnly value={this.props.password.password} ref={this.passwordInput} type={this.state.passwordHidden ? 'password' : 'text'}/>
                     <Popup content={this.state.passwordHidden ? 'Show Password' : 'Hide Password'} trigger={<Button inline size="medium" icon={this.state.passwordHidden ? 'eye' : 'eye slash'} onClick={this.togglePassword} />} />
                     <Popup content="Copied!" open={this.state.copied} trigger={<Button inline size="medium" icon="copy" onClick={this.handleCopy} disabled={this.state.passwordHidden ? true : false}/>} />
                 </Message.Content>
