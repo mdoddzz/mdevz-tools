@@ -62,7 +62,6 @@ const NavBarMobile = ({
     >
       <Menu.Item
         as={Link} 
-        exact
         to='/'
         key="home">
         <Image size="mini" src={logo} />
@@ -87,7 +86,6 @@ const NavBarMobile = ({
       <Menu fixed="top">
         <Menu.Item
          as={Link} 
-         exact
          to='/'
          key="home">
           <Image size="mini" src={logo} />
