@@ -42,7 +42,7 @@ export default class PasswordGenerator extends Component {
     var password = this.createPassword();
     this.setState({
       password: "test",
-      passwordList: this.state.passwordList.concat({id: this.state.passwordKey, password: password, generated: new Date().toLocaleString()}),
+      passwordList: this.state.passwordList.concat({id: this.state.passwordKey, password: password, generated: new Date().toLocaleString(), hidePassword: this.state.hidePassword}),
       passwordKey: this.state.passwordKey + 1
     });
   }
@@ -114,31 +114,31 @@ export default class PasswordGenerator extends Component {
             </Form.Field>      
             <Form.Field inline>
               <label>Include Lowercase Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableLowercase")} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableLowercase")} />
             </Form.Field>
             <Form.Field inline>
               <label>Include Uppercase Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableUppercase")} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableUppercase")} />
             </Form.Field>
             <Form.Field inline>
               <label>Include Numbers</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
               <label>Include Special Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
               <label>Include Similar Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange('enableSimilar')} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange('enableSimilar')} />
             </Form.Field>
             <Form.Field inline>
               <label>Hide Password on Generate</label>
-              <Checkbox defaultChecked="false" toggle onChange={this.handleCheckboxChange('hidePassword')} />
+              <Checkbox toggle onChange={this.handleCheckboxChange('hidePassword')} />
             </Form.Field>
             <Form.Field inline>
-              <label>Always Copy to Clipboard</label>
-              <Checkbox defaultChecked="false" toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
+              <label>Copy to Clipboard on Generate</label>
+              <Checkbox toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
             </Form.Field>
             <Button 
                 onClick={this.generatePassword}
@@ -147,12 +147,15 @@ export default class PasswordGenerator extends Component {
                 Generate Password
             </Button>
             <Divider clearing hidden />
-            {[...passwordList].reverse().map((password, index) => 
-              <PasswordMessage 
-                parent={this}
-                password={password} 
-              />
-            )}
+            <div className="passwordList">
+              {[...passwordList].map((password, index) => 
+                <PasswordMessage 
+                  parent={this}
+                  password={password} 
+                  copyToClipboard={(index === passwordList.length - 1 && this.state.copyToClipboard) ? true : false}
+                />
+              )}
+            </div>
           </FormContainer>
       </Container>
     )

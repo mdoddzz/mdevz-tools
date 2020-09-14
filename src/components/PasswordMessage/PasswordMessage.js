@@ -6,7 +6,7 @@ import {
     Button,
     Segment,
     Popup,
-    Form
+    Input
   } from 'semantic-ui-react'
 
 export default class PasswordMessage extends Component {
@@ -16,11 +16,22 @@ export default class PasswordMessage extends Component {
         isOpen: false
       });
 
+      this.passwordInput = React.createRef();
+
       // This binding is necessary to make `this` work in the callback
       this.handleCopy = this.handleCopy.bind(this);
     }
 
+    componentDidMount() {
+      if(this.props.copyToClipboard) {
+        this.handleCopy();
+      }
+    }
+
     handleCopy() {
+      this.passwordInput.current.select();
+      document.execCommand('copy');
+
       this.setState({ 
         isOpen: true
       })
@@ -29,7 +40,7 @@ export default class PasswordMessage extends Component {
         this.setState({ 
           isOpen: false
         })
-      }, 2000)
+      }, 1500)
     }
 
     render() {
@@ -49,7 +60,7 @@ export default class PasswordMessage extends Component {
                 <Icon name='user secret' />
                 <Message.Content>
                     <Message.Header>Your password is:</Message.Header>
-                    <Form.Input className="PasswordOutput" readonly value={this.props.password.password}/>
+                    <Input className="PasswordOutput" readonly value={this.props.password.password} ref={this.passwordInput} type={this.props.password.hidePassword ? 'password' : 'text'}/>
                     <Popup content="Copied" open={this.state.isOpen} trigger={<Button inline size="medium" icon="copy" onClick={this.handleCopy} />} />
                 </Message.Content>
             </Message>
