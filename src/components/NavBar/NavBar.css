@@ -14,3 +14,12 @@
 .ui.sidebar.menu h4 {
     margin-top: 10px;
 }
+
+#root .App > div > .ui.segments, #root .App > div > .ui.segments > .ui.segment {
+    margin: 0px !important;
+    border-radius: 0px !important;
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+    color: #fff !important;
+}
