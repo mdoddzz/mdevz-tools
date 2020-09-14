@@ -26,6 +26,8 @@ export default class PasswordGenerator extends Component {
       enableNumbers: true,
       enableSymbols: true,
       enableSimilar: true,
+      hidePassword: false,
+      copyToClipboard: false,
       password: "",
       passwordKey: 1,
       passwordList: [],
@@ -129,6 +131,14 @@ export default class PasswordGenerator extends Component {
             <Form.Field inline>
               <label>Include Similar Characters</label>
               <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange('enableSimilar')} />
+            </Form.Field>
+            <Form.Field inline>
+              <label>Hide Password on Generate</label>
+              <Checkbox defaultChecked="false" toggle onChange={this.handleCheckboxChange('hidePassword')} />
+            </Form.Field>
+            <Form.Field inline>
+              <label>Always Copy to Clipboard</label>
+              <Checkbox defaultChecked="false" toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
             </Form.Field>
             <Button 
                 onClick={this.generatePassword}
