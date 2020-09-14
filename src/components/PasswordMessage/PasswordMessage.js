@@ -11,20 +11,22 @@ import {
 
 export default class PasswordMessage extends Component {
 
-    componentWillMount() {
-      this.setState({
-        copied: false,
-        passwordHidden: this.props.password.hidePassword ? true : false
-      });
+    state = {
+      copied: false,
+      passwordHidden: this.props.password.hidePassword ? true : false
+    }
+
+    passwordInput = "";
+
+    constructor(props) {
+      super(props);
 
       this.passwordInput = React.createRef();
 
       // This binding is necessary to make `this` work in the callback
       this.handleCopy = this.handleCopy.bind(this);
       this.togglePassword = this.togglePassword.bind(this);
-    }
 
-    componentDidMount() {
       if(this.props.copyToClipboard) {
         this.handleCopy();
       }

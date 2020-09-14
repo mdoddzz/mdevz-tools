@@ -17,24 +17,26 @@ for (var i = 8; i <= 32; i++) {
 
 export default class PasswordGenerator extends Component {
 
-  componentWillMount() {
-    this.setState({
-      options: lengthOptions,
-      passwordLength: 16,
-      enableLowercase: true,
-      enableUppercase: true,
-      enableNumbers: true,
-      enableSymbols: true,
-      enableSimilar: true,
-      hidePassword: false,
-      copyToClipboard: false,
-      password: "",
-      passwordKey: 1,
-      passwordList: [],
+  state = {
+    options: lengthOptions,
+    passwordLength: 16,
+    enableLowercase: true,
+    enableUppercase: true,
+    enableNumbers: true,
+    enableSymbols: true,
+    enableSimilar: true,
+    hidePassword: false,
+    copyToClipboard: false,
+    password: "",
+    passwordKey: 1,
+    passwordList: [],
 
-      deleteConfirmOpen: false,
-      deleteItem: 0
-    });
+    deleteConfirmOpen: false,
+    deleteItem: 0
+  }
+
+  constructor(props) {
+    super();
 
     // This binding is necessary to make `this` work in the callback
     this.generatePassword = this.generatePassword.bind(this);
@@ -90,7 +92,12 @@ export default class PasswordGenerator extends Component {
   }
 
   handleCheckboxChange = (fieldName) => (event, { checked }) => {
-    this.setState({ [fieldName]: checked });
+    if((fieldName === "hidePassword" && this.state.copyToClipboard) || (fieldName === "copyToClipboard" && this.state.hidePassword)) {
+      console.log(event)
+      event.persist()
+    } else {
+      this.setState({ [fieldName]: checked });
+    }
   }
 
   handleDeleteConfirm() {
