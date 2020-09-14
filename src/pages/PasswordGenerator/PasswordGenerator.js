@@ -123,7 +123,7 @@ export default class PasswordGenerator extends Component {
               <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
-              <label>Include Symbols</label>
+              <label>Include Special Characters</label>
               <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
