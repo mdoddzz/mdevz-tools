@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormContainer } from '../../components'
+import { FormContainer, PasswordMessage } from '../../components'
 import './PasswordGenerator.css'
 import {
   Container,
@@ -7,8 +7,6 @@ import {
   Dropdown,
   Checkbox,
   Button,
-  Message,
-  Segment,
   Divider
 } from 'semantic-ui-react'
 
@@ -28,6 +26,8 @@ export default class PasswordGenerator extends Component {
       enableNumbers: true,
       enableSymbols: true,
       enableSimilar: true,
+      hidePassword: false,
+      copyToClipboard: false,
       password: "",
       passwordKey: 1,
       passwordList: [],
@@ -42,7 +42,7 @@ export default class PasswordGenerator extends Component {
     var password = this.createPassword();
     this.setState({
       password: "test",
-      passwordList: this.state.passwordList.concat({id: this.state.passwordKey, password: password, generated: new Date().toLocaleString()}),
+      passwordList: this.state.passwordList.concat({id: this.state.passwordKey, password: password, generated: new Date().toLocaleString(), hidePassword: this.state.hidePassword}),
       passwordKey: this.state.passwordKey + 1
     });
   }
@@ -114,23 +114,31 @@ export default class PasswordGenerator extends Component {
             </Form.Field>      
             <Form.Field inline>
               <label>Include Lowercase Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableLowercase")} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableLowercase")} />
             </Form.Field>
             <Form.Field inline>
               <label>Include Uppercase Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableUppercase")} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableUppercase")} />
             </Form.Field>
             <Form.Field inline>
               <label>Include Numbers</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
-              <label>Include Symbols</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
+              <label>Include Special Characters</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
             </Form.Field>
             <Form.Field inline>
               <label>Include Similar Characters</label>
-              <Checkbox defaultChecked="true" toggle onChange={this.handleCheckboxChange('enableSimilar')} />
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange('enableSimilar')} />
+            </Form.Field>
+            <Form.Field inline>
+              <label>Hide Password on Generate</label>
+              <Checkbox toggle onChange={this.handleCheckboxChange('hidePassword')} />
+            </Form.Field>
+            <Form.Field inline>
+              <label>Copy to Clipboard on Generate</label>
+              <Checkbox toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
             </Form.Field>
             <Button 
                 onClick={this.generatePassword}
@@ -139,26 +147,15 @@ export default class PasswordGenerator extends Component {
                 Generate Password
             </Button>
             <Divider clearing hidden />
-            {[...passwordList].reverse().map((password, index) => 
-              <div>
-                <Message
-                  onDismiss={(e)=>{
-                    e.stopPropagation();
-                    e.preventDefault();
-                    this.handleDismiss(password.id);
-                  }}
-                  attached="top"
-                  icon="user secret"
-                  key={password.id}
-                  header='Your password is:'
-                  content={password.password}
+            <div className="passwordList">
+              {[...passwordList].map((password, index) => 
+                <PasswordMessage 
+                  parent={this}
+                  password={password} 
+                  copyToClipboard={(index === passwordList.length - 1 && this.state.copyToClipboard) ? true : false}
                 />
-                <Segment attached="bottom" size="mini">
-                  <b>Generated at:</b> {password.generated}<br />
-                  <b>Settings: </b>
-                </Segment>
-              </div>
-            )}
+              )}
+            </div>
           </FormContainer>
       </Container>
     )
