@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormContainer, PasswordMessage } from '../../components'
+import { FormContainer, PasswordMessage, DeleteConfirm } from '../../components'
 import './PasswordGenerator.css'
 import {
   Container,
@@ -17,25 +17,32 @@ for (var i = 8; i <= 32; i++) {
 
 export default class PasswordGenerator extends Component {
 
-  componentWillMount() {
-    this.setState({
-      options: lengthOptions,
-      passwordLength: 16,
-      enableLowercase: true,
-      enableUppercase: true,
-      enableNumbers: true,
-      enableSymbols: true,
-      enableSimilar: true,
-      hidePassword: false,
-      copyToClipboard: false,
-      password: "",
-      passwordKey: 1,
-      passwordList: [],
-    });
+  state = {
+    options: lengthOptions,
+    passwordLength: 16,
+    enableLowercase: true,
+    enableUppercase: true,
+    enableNumbers: true,
+    enableSymbols: true,
+    enableSimilar: true,
+    hidePassword: false,
+    copyToClipboard: false,
+    password: "",
+    passwordKey: 1,
+    passwordList: [],
+
+    deleteConfirmOpen: false,
+    deleteItem: 0
+  }
+
+  constructor(props) {
+    super();
 
     // This binding is necessary to make `this` work in the callback
     this.generatePassword = this.generatePassword.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
+    this.handleDeleteCancel = this.handleDeleteCancel.bind(this);
   }
 
   generatePassword() {
@@ -74,18 +81,10 @@ export default class PasswordGenerator extends Component {
   }
 
   handleDismiss(itemId) {
-    if(window.confirm("Are you sure you want to delete this password? It will not be recoverable.")){
-
-      var passwordList = this.state.passwordList;
-      const itemIndex = passwordList.findIndex(item => item.id === itemId);
-
-      if (itemIndex === -1) return;
-      passwordList.splice(itemIndex, 1);
-      this.setState({
-        passwordList: passwordList
-      })
-
-   }
+    this.setState({
+      deleteConfirmOpen: true,
+      deleteItem: itemId
+    })
   }
 
   handleChange = (fieldName) => (event, {value}) => {
@@ -93,7 +92,34 @@ export default class PasswordGenerator extends Component {
   }
 
   handleCheckboxChange = (fieldName) => (event, { checked }) => {
-    this.setState({ [fieldName]: checked });
+    if((fieldName === "hidePassword" && this.state.copyToClipboard) || (fieldName === "copyToClipboard" && this.state.hidePassword)) {
+      console.log(event)
+      event.persist()
+    } else {
+      this.setState({ [fieldName]: checked });
+    }
+  }
+
+  handleDeleteConfirm() {
+
+    var passwordList = this.state.passwordList;
+    const itemIndex = passwordList.findIndex(item => item.id === this.state.deleteItem  );
+
+    if (itemIndex === -1) return;
+    passwordList.splice(itemIndex, 1);
+    this.setState({
+      passwordList: passwordList,
+      deleteConfirmOpen: false,
+      deleteItem: 0
+    })
+
+  }
+
+  handleDeleteCancel() {
+    this.setState({
+      deleteConfirmOpen: false,
+      deleteItem: 0
+    })
   }
 
   render() {
@@ -143,6 +169,7 @@ export default class PasswordGenerator extends Component {
             <Button 
                 onClick={this.generatePassword}
                 floated='right'
+                primary
                 >
                 Generate Password
             </Button>
@@ -157,6 +184,12 @@ export default class PasswordGenerator extends Component {
               )}
             </div>
           </FormContainer>
+          <DeleteConfirm 
+            open={this.state.deleteConfirmOpen}
+            onCancel={this.handleDeleteCancel}
+            onConfirm={this.handleDeleteConfirm}
+            content="Are you sure you want to delete this password? It will not be recoverable."
+          />
       </Container>
     )
   }

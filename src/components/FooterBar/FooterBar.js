@@ -49,10 +49,10 @@ export default class FooterBar extends Component {
             <Divider inverted section />
             <Image centered size="mini" src={logo} />
             <List horizontal inverted divided link size='small'>
-                <List.Item as={Link}>
+                <List.Item as={Link} to="/sitemap">
                 Site Map
                 </List.Item>
-                <List.Item as={Link}>
+                <List.Item as={Link} to="/privacy">
                 Privacy Policy
                 </List.Item>
                 <List.Item as='a' href='https://michaeldodd.co.uk' target="_blank">
