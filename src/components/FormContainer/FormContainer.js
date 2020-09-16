@@ -11,6 +11,7 @@ export default class FormContainer extends Component {
         <Form 
           className="default form"
           onSubmit={this.props.onSubmit}
+          action="/"
           >
             <Message
               visible={this.props.error}
