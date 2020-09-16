@@ -8,7 +8,10 @@ import {
 export default class FormContainer extends Component {
     render() {
       return (
-        <Form className="default form">
+        <Form 
+          className="default form"
+          onSubmit={this.props.onSubmit}
+          >
             <Message
               visible={this.props.error}
               error

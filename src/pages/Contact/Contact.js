@@ -19,10 +19,10 @@ const encode = (data) => {
 
 const contactReasons = [
   {key: 0, text: "General Enquiry", value: "General Enquiry"},
-  {key: 1, text: "Contact Developer", value: "Contact Developer"},
   {key: 2, text: "Feature Request", value: "Feature Request"},
   {key: 3, text: "Report Error", value: "Report Error"},
   {key: 4, text: "Press", value: "Press"},
+  {key: 1, text: "Contact Developer", value: "Contact Developer"},
   {key: 5, text: "Other", value: "Other"}
 ]
 
@@ -77,7 +77,7 @@ export default class Contact extends Component {
       this.setState({messageError: false})
       error = false
     }
-    
+
     if(!error) {
       fetch("/", {
         method: "POST",
@@ -90,6 +90,7 @@ export default class Contact extends Component {
           "message": this.state.message,
         })
       })
+        .then(res => console.log(res))
         .then(() => this.handleSuccess())
         .catch(error =>  this.handleError(error));
     } else {
@@ -127,7 +128,9 @@ export default class Contact extends Component {
       <Container text style={{ marginTop: '7em' }}>
           <Header as='h1'>Contact Us</Header>
 
-          <FormContainer success={success} error={error} errorMessage={errorMessage}>
+          <p>We are always happy to hear from you, any feedback or questions are appreciated and should receive a response as quickly as possible</p>
+
+          <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit}>
             <Form.Field
               required
               label='Name' 
@@ -170,9 +173,10 @@ export default class Contact extends Component {
               onClick={this.handleSubmit}
               floated='right'
               primary
+              type='submit'
               >
               <Button.Content visible>Send</Button.Content>
-              <Button.Content hidden>
+              <Button.Content hidden >
                 <Icon name='send' />
               </Button.Content>
             </Button>
