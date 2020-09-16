@@ -16,8 +16,8 @@ const Routes = () => {
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
       <Route exact path='/' component={Home}></Route>
       <Route exact path='/contact' component={Contact}></Route>
-      <Route exact path='/jsonformatter' component={JsonFormatter}></Route>
-      <Route exact path='/urlshortener' component={UrlShortener}></Route>
+      <Route exact path='/general/jsonformatter' component={JsonFormatter}></Route>
+      <Route exact path='/general/urlshortener' component={UrlShortener}></Route>
       <Route exact path='/security/passwordgenerator' component={PasswordGeneratorPage}></Route>
       <Route exact path='/security/securityheaders' component={SecurityHeaders}></Route>
     </Switch>
