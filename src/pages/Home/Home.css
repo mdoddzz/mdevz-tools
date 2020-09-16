@@ -1,3 +1,10 @@
 .ui.card>.image>img, .ui.cards>.card>.image>img {
     height: 165px !important;
 }
+
+.ui.segment.active.tab {
+    background-color: transparent;
+    padding: 1px;
+    border: 0px;
+    box-shadow: none;
+}

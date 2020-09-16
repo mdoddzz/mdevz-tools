@@ -209,8 +209,8 @@ const leftItems = [
   { as: NavLink, content: 'Contact', to: '/contact', key: "contact" }
 ];
 const rightItems = [
-  { as: NavLink, content: "Login", to: '/login', key: "login" },
-  { as: NavLink, content: "Register", to: '/register', key: "register" }
+  //{ as: NavLink, content: "Login", to: '/login', key: "login" },
+  //{ as: NavLink, content: "Register", to: '/register', key: "register" }
 ];
 
 export default class NavMenu extends Component {
