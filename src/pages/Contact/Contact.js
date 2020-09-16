@@ -31,8 +31,7 @@ export default class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "", email: "", reason: "", message: "", 
-      nameError: false, emailError: false, reasonError: false, messageError: false,
+      name: "", email: "", reason: "", message: "",
       error: false, errorMessage: "", success: false
     };
 
@@ -44,58 +43,20 @@ export default class Contact extends Component {
 
   handleSubmit = e => {
 
-    var error = false;
-    // validate form
-    if (this.state.name === '') {
-      this.setState({nameError: true})
-      error = true
-    } else {
-      this.setState({nameError: false})
-      error = false
-    }
-
-    if (this.state.email === '') {
-      this.setState({emailError: true})
-      error = true
-    } else {
-      this.setState({emailError: false})
-      error = false
-    }
-
-    if (this.state.reason === '') {
-      this.setState({reasonError: true})
-      error = true
-    } else {
-      this.setState({reasonError: false})
-      error = false
-    }
-
-    if (this.state.message === '') {
-      this.setState({messageError: true})
-      error = true
-    } else {
-      this.setState({messageError: false})
-      error = false
-    }
-
-    if(!error) {
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({ 
-          "form-name": "contact",
-          "name": this.state.name,
-          "email": this.state.email,
-          "reason": this.state.reason,
-          "message": this.state.message,
-        })
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ 
+        "form-name": "contact",
+        "name": this.state.name,
+        "email": this.state.email,
+        "reason": this.state.reason,
+        "message": this.state.message,
       })
-        .then(res => console.log(res))
-        .then(() => this.handleSuccess())
-        .catch(error =>  this.handleError(error));
-    } else {
-      this.handleError("A required field has not been complete.")
-    }
+    })
+      .then(res => console.log(res))
+      .then(() => this.handleSuccess())
+      .catch(error =>  this.handleError(error));
 
     e.preventDefault();
   };
@@ -123,21 +84,20 @@ export default class Contact extends Component {
   handleChange = (e, data) => this.setState({ [data.name]: data.value, [data.name+"Error"]: false });
 
   render() {
-    const { name, email, reason, message, nameError, emailError, reasonError, messageError, success, error, errorMessage  } = this.state;
+    const { name, email, reason, message, success, error, errorMessage  } = this.state;
     return (
       <Container text style={{ marginTop: '7em' }}>
           <Header as='h1'>Contact Us</Header>
 
           <p>We are always happy to hear from you, any feedback or questions are appreciated and should receive a response as quickly as possible</p>
 
-          <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit}>
+          <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit} >
             <Form.Field
               required
               label='Name' 
               control={Input}
               name="name"
               value={name}
-              error={nameError}
               onChange={this.handleChange}
             />
             <Form.Field
@@ -146,7 +106,6 @@ export default class Contact extends Component {
               control={Input}
               name="email"
               value={email}
-              error={emailError}
               onChange={this.handleChange}
             />
             <Form.Field
@@ -155,7 +114,6 @@ export default class Contact extends Component {
               control={Select}
               name="reason"
               value={reason}
-              error={reasonError}
               options={contactReasons}
               onChange={this.handleChange}
             />
@@ -165,12 +123,10 @@ export default class Contact extends Component {
               control={TextArea}
               name="message"
               value={message}
-              error={messageError}
               onChange={this.handleChange}
             />
             <Button 
               animated
-              onClick={this.handleSubmit}
               floated='right'
               primary
               type='submit'
