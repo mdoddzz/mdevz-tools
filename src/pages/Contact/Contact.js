@@ -43,6 +43,8 @@ export default class Contact extends Component {
 
   handleSubmit = e => {
 
+    e.preventDefault();
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -57,8 +59,6 @@ export default class Contact extends Component {
       .then(res => console.log(res))
       .then(() => this.handleSuccess())
       .catch(error =>  this.handleError(error));
-
-    e.preventDefault();
   };
 
   handleSuccess() {
@@ -92,6 +92,7 @@ export default class Contact extends Component {
           <p>We are always happy to hear from you, any feedback or questions are appreciated and should receive a response as quickly as possible</p>
 
           <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit} >
+            <input type="hidden" name="form-name" value="contact" />  
             <Form.Field
               required
               label='Name' 
