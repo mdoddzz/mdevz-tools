@@ -169,6 +169,7 @@ export default class PasswordGenerator extends Component {
             <Button 
                 onClick={this.generatePassword}
                 floated='right'
+                primary
                 >
                 Generate Password
             </Button>
