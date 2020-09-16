@@ -31,7 +31,7 @@ export default class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "", email: "", reason: "", message: "",
+      name: "", email: "", reason: "", message: "", botField: "",
       error: false, errorMessage: "", success: false
     };
 
@@ -54,6 +54,8 @@ export default class Contact extends Component {
         "email": this.state.email,
         "reason": this.state.reason,
         "message": this.state.message,
+        "bot-field": this.state.botField,
+        "isValidated": false
       })
     })
       .then(res => console.log(res))
@@ -93,6 +95,12 @@ export default class Contact extends Component {
 
           <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit} >
             <input type="hidden" name="form-name" value="contact" />  
+            <div hidden>
+              <label>
+                Don’t fill this out:{' '}
+                <input name="botField" onChange={this.handleChange} />
+              </label>
+            </div>
             <Form.Field
               required
               label='Name' 
