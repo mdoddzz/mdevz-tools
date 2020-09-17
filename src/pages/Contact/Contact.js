@@ -53,9 +53,7 @@ export default class Contact extends Component {
         "name": this.state.name,
         "email": this.state.email,
         "reason": this.state.reason,
-        "message": this.state.message,
-        "bot-field": this.state.botField,
-        "isValidated": false
+        "message": this.state.message
       })
     })
       .then(res => console.log(res))
@@ -70,7 +68,7 @@ export default class Contact extends Component {
       this.setState({ 
         success: false
       })
-    }, 5000)
+    }, 10000)
   }
 
   handleError(error) {
@@ -94,13 +92,6 @@ export default class Contact extends Component {
           <p>We are always happy to hear from you, any feedback or questions are appreciated and should receive a response as quickly as possible</p>
 
           <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit} >
-            <input type="hidden" name="form-name" value="contact" />  
-            <div hidden>
-              <label>
-                Don’t fill this out:{' '}
-                <input name="botField" onChange={this.handleChange} />
-              </label>
-            </div>
             <Form.Field
               required
               label='Name' 

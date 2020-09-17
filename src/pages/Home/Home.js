@@ -10,9 +10,8 @@ import {
   Container,
   Header,
   Card,
-  Responsive,
   Image,
-  Button
+  Tab
 } from 'semantic-ui-react'
 
 const items = [
@@ -24,7 +23,8 @@ const items = [
     image: jsonImage,
     as: Link,
     to: "/jsonformatter",
-    color: "teal"
+    color: "teal",
+    type: 'General'
   },
   {
     header: 'URL Shortener',
@@ -34,7 +34,8 @@ const items = [
     image: urlImage,
     as: Link,
     to: "/urlshortener",
-    color: "teal"
+    color: "teal",
+    type: 'General'
   },
   {
     header: 'Password Generator',
@@ -44,7 +45,8 @@ const items = [
     image: passwordImg,
     as: Link,
     to: "/security/passwordgenerator",
-    color: "red"
+    color: "red",
+    type: 'Security'
   },
   {
     header: 'Security Headers',
@@ -54,20 +56,41 @@ const items = [
     image: securityImg,
     as: Link,
     to: "/security/securityheaders",
-    color: "red"
+    color: "red",
+    type: 'Security'
   },
 ]
 
-const CardDesktopGroup = () => <Card.Group itemsPerRow="3" items={items} />
+const tabs = [
+    { 
+      menuItem: {
+        content: 'All',
+        color: ''
+      },
+      render: () => <Tab.Pane attached={false}><CardGroup filter=""/></Tab.Pane>,
+    }, 
+    {
+      menuItem: {
+        content: 'General',
+        color: 'teal'
+      },
+      render: () => <Tab.Pane attached={false}><CardGroup filter="General"/></Tab.Pane>,
+    }, 
+    { 
+      menuItem: {
+        content: 'Security',
+        color: 'red'
+      },
+      render: () => <Tab.Pane attached={false}><CardGroup filter="Security"/></Tab.Pane>,
+    }, 
+]
 
-const CardMobileGroup = () => <Card.Group itemsPerRow="1" centered items={items} />
+const CardGroup = ({ filter }) => <Card.Group itemsPerRow="3" items={filter ? items.filter(item => item.type === filter) : items} />
 
-const FilterButtons = () => (
-  <Button.Group buttons={[
-    { content: 'General', color: 'teal' }, 
-    { content: 'Security', color: 'red' }, 
-    { content: 'All', disabled: true }, 
-  ]} />
+const ToolTabs = () => (
+  <Tab 
+    menu={{ attached: false, tabular: false }} 
+    panes={tabs} />
 )
 
 export default class HomePage extends Component {
@@ -79,21 +102,10 @@ export default class HomePage extends Component {
         <Header as='h1'>About</Header>
         <p>This is a collection of useful developer/ web tools. Designed to simplify some basic tasks completed as a developer.</p>
 
-        <Header as="h5">Filter Tools:</Header>
-
-        <FilterButtons />
-
-        <br />
-
         <Header as='h2'>Tools</Header>
 
-        <Responsive {...Responsive.onlyMobile}>
-         <CardMobileGroup />
-        </Responsive>
-        <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-          <CardDesktopGroup />
-        </Responsive>
-  
+        <ToolTabs />
+
       </Container>
   
     </div>
