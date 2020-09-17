@@ -85,7 +85,7 @@ const tabs = [
     }, 
 ]
 
-const CardGroup = ({ filter }) => <Card.Group itemsPerRow="3" items={filter ? items.filter(item => item.type === filter) : items} />
+const CardGroup = ({ filter }) => <Card.Group items={filter ? items.filter(item => item.type === filter) : items} />
 
 const ToolTabs = () => (
   <Tab 
