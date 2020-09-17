@@ -106,7 +106,6 @@ const NavBarDesktop = ({ leftItems, rightItems }) => (
   <Menu fixed="top">
     <Menu.Item 
       as={Link} 
-      exact
       to='/'
       key="home">
       <Image size="mini" src={logo} />

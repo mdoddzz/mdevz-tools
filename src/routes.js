@@ -11,6 +11,8 @@ import UrlShortener from './pages/UrlShortener/UrlShortener'
 import PasswordGeneratorPage from './pages/PasswordGenerator/PasswordGenerator'
 import SecurityHeaders from './pages/SecurityHeaders/SecurityHeaders'
 
+import NotFound from './pages/NotFound/NotFound'
+
 const Routes = () => {
   return (
     <Switch> {/* The Switch decides which component to show based on the current URL.*/}
@@ -20,6 +22,8 @@ const Routes = () => {
       <Route exact path='/general/urlshortener' component={UrlShortener}></Route>
       <Route exact path='/security/passwordgenerator' component={PasswordGeneratorPage}></Route>
       <Route exact path='/security/securityheaders' component={SecurityHeaders}></Route>
+
+      <Route component={NotFound} />
     </Switch>
   );
 }
