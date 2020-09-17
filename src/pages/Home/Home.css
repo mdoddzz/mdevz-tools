@@ -1,5 +1,5 @@
 .ui.card>.image>img, .ui.cards>.card>.image>img {
-    height: 165px !important;
+    height: 145px !important;
 }
 
 .ui.segment.active.tab {
@@ -18,6 +18,10 @@
 .ui.segment > .ui.cards {
     margin-left: -1em;
     margin-right: -1em;
+}
+
+.ui.segment > .ui.cards > .ui.card > .image, .ui.segment > .ui.cards > .ui.cards >.card > .image {
+    padding: 10px;
 }
 
 /* tablets */
