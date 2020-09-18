@@ -14,7 +14,8 @@ export default class SecurityHeaders extends Component {
   state = {
     headers: null,
     site: '',
-    error: false
+    error: false,
+    scanning: false
   }
 
   constructor(props) {
@@ -25,6 +26,12 @@ export default class SecurityHeaders extends Component {
 
   checkHeaders = (e) => { 
 
+    this.setState({
+      scanning: true,
+      error: false,
+      headers: null
+    })
+
     fetch("http://tools-api.mdevz.uk/headers/check?site=" + this.state.site)
       .then(response => {
         if (response.ok) {
@@ -34,12 +41,14 @@ export default class SecurityHeaders extends Component {
         }
       })
       .then((result) => this.setState({
-          headers: result,
-          error: false
-        }))
+          headers: result.headers,
+          error: false,
+          scanning: false
+      }))
       .catch(error => this.setState({ 
         error,
-        headers: null
+        headers: null,
+        scanning: false
       }));
 
   }
@@ -47,7 +56,7 @@ export default class SecurityHeaders extends Component {
   handleChange = (e, data) => this.setState({ [data.name]: data.value});
 
   render() {
-    const {headers, error} = this.state
+    const {scanning, headers, error} = this.state
     return (
       <Container text style={{ marginTop: '7em' }}>
           <Header as='h1'>Security Headers</Header>
@@ -56,10 +65,10 @@ export default class SecurityHeaders extends Component {
 
           <Container textAlign='center'>
             <Input 
-              error={error}
+              error={error ? true : false}
               action={{
                 color: 'teal',
-                content: 'Scan',
+                content: scanning ? 'Scanning...' : 'Scan',
                 onClick: this.checkHeaders
               }} 
               name="site"
@@ -87,17 +96,17 @@ export default class SecurityHeaders extends Component {
               </Table.Header>
 
               <Table.Body>
-                {headers && headers.map(item => (
-                  <Table.Row>
-                    <Table.Cell style={{ fontWeight: 'bold' }} >{item.split(/:(.+)/)[0]}</Table.Cell>
-                    <Table.Cell>{item.split(/:(.+)/)[1]}</Table.Cell>
+                {headers &&  headers.site_headers.map((item, i) => (
+                  <Table.Row key={i}>
+                    <Table.Cell style={{ fontWeight: 'bold' }} >{item.key}</Table.Cell>
+                    <Table.Cell>{item.value}</Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
             </Table>
 
           </Segment>
-
+          
       </Container>
     )
   }
