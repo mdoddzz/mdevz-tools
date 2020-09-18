@@ -1,0 +1,27 @@
+.headerTable.ui.table thead tr>th {
+    background: #e6e6e6;
+    font-size: 20px;
+    padding: 14px 12px !important;
+}
+
+.headerTable.ui.table thead tr {
+    padding: 0px;
+}
+
+.headerTable.ui.table tbody tr td:first-child {
+    text-align: right;
+    width: 200px;
+}
+
+.headerTable.ui.table tbody tr td {
+    word-break: break-word;  
+}
+
+@media only screen and (max-width : 765px) {
+
+    .headerTable.ui.table tbody tr td:first-child {
+        text-align: left;
+        width: auto;
+    }
+
+}
