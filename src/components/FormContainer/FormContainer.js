@@ -17,7 +17,7 @@ export default class FormContainer extends Component {
               visible={this.props.error}
               error
               header='Error'
-              content={this.props.errorMessage ? this.props.errorMessage : "You can only sign up for an account once with a given e-mail address." }
+              content={this.props.errorMessage ? this.props.errorMessage : "Unexpected Error." }
               />
             <Message
               visible={this.props.success}
