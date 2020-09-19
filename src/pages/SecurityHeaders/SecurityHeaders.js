@@ -32,7 +32,7 @@ export default class SecurityHeaders extends Component {
       headers: null
     })
 
-    fetch("http://tools-api.mdevz.uk/headers/check?site=" + this.state.site)
+    fetch("https://tools-api.mdevz.uk/headers/check?site=" + this.state.site)
       .then(response => {
         if (response.ok) {
           return response.json();
