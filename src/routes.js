@@ -10,6 +10,9 @@ import JsonFormatter from './pages/JsonFormatter/JsonFormatter'
 import UrlShortener from './pages/UrlShortener/UrlShortener'
 import PasswordGeneratorPage from './pages/PasswordGenerator/PasswordGenerator'
 import SecurityHeaders from './pages/SecurityHeaders/SecurityHeaders'
+import DnsChecker from './pages/DnsChecker/DnsChecker'
+
+import NotFound from './pages/NotFound/NotFound'
 
 const Routes = () => {
   return (
@@ -18,8 +21,11 @@ const Routes = () => {
       <Route exact path='/contact' component={Contact}></Route>
       <Route exact path='/general/jsonformatter' component={JsonFormatter}></Route>
       <Route exact path='/general/urlshortener' component={UrlShortener}></Route>
+      <Route exact path='/general/dnschecker' component={DnsChecker}></Route>
       <Route exact path='/security/passwordgenerator' component={PasswordGeneratorPage}></Route>
       <Route exact path='/security/securityheaders' component={SecurityHeaders}></Route>
+
+      <Route component={NotFound} />
     </Switch>
   );
 }

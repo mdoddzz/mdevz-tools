@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import './Home.css';
 import { Link } from "react-router-dom";
 import logo from '../../images/mdevz-tools-logo-white.svg'
-import jsonImage from '../../images/homeIcons/jsonformatter.png'
-import passwordImg from '../../images/homeIcons/passwordgenerator.png'
-import securityImg from '../../images/homeIcons/securityheaders.png'
-import urlImage from '../../images/homeIcons/urlshortener.png'
+import jsonImage from '../../images/homeIcons/jsonformatter.svg'
+import passwordImg from '../../images/homeIcons/passwordgenerator.svg'
+import securityImg from '../../images/homeIcons/securityheaders.svg'
+import urlImage from '../../images/homeIcons/urlshortener.svg'
 import {
   Container,
   Header,
@@ -85,7 +85,7 @@ const tabs = [
     }, 
 ]
 
-const CardGroup = ({ filter }) => <Card.Group itemsPerRow="3" items={filter ? items.filter(item => item.type === filter) : items} />
+const CardGroup = ({ filter }) => <Card.Group items={filter ? items.filter(item => item.type === filter) : items} />
 
 const ToolTabs = () => (
   <Tab 
