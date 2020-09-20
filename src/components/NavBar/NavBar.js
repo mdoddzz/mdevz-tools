@@ -8,7 +8,6 @@ import {
   Image,
   Menu,
   Sidebar,
-  Segment ,
   Dropdown
 } from "semantic-ui-react";
 import './NavBar.css'
@@ -41,104 +40,6 @@ const NavBarDropdown = ({
      }
    </Dropdown.Menu>
   </Dropdown>
-);
-
-const NavBarMobile = ({
-  children,
-  leftItems,
-  onPusherClick,
-  onToggle,
-  rightItems,
-  visible
-}) => (
-  <Sidebar.Pushable>
-    <Sidebar
-      as={Menu}
-      animation="overlay"
-      icon="labeled"
-      vertical
-      visible={visible}
-      width='thin'
-    >
-      <Menu.Item
-        as={Link} 
-        to='/'
-        key="home">
-        <Image size="mini" src={logo} />
-        <h4>mDevz Tools</h4>
-      </Menu.Item>
-     {_.map(leftItems, item => item.dropdown ? 
-      <NavBarDropdown 
-        dropdownItems={item.dropdown}
-        key={item.key}
-        text={item.content}
-        to={item.to}
-      /> 
-      : 
-      <Menu.Item {...item} />)
-      }
-    </Sidebar>
-    <Sidebar.Pusher
-      dimmed={visible}
-      onClick={onPusherClick}
-      style={{ minHeight: "100vh" }}
-    >
-      <Menu fixed="top">
-        <Menu.Item
-         as={Link} 
-         to='/'
-         key="home">
-          <Image size="mini" src={logo} />
-        </Menu.Item>
-        <Menu.Item onClick={onToggle}>
-          <Icon name="sidebar" />
-        </Menu.Item>
-        <Menu.Menu position="right">
-          {_.map(rightItems, item => <Menu.Item {...item} />)}
-        </Menu.Menu>
-      </Menu>
-      {children}
-    </Sidebar.Pusher>
-  </Sidebar.Pushable>
-);
-
-const NavBarDesktop = ({ leftItems, rightItems }) => (
-  <Menu fixed="top">
-    <Menu.Item 
-      as={Link} 
-      to='/'
-      key="home">
-      <Image size="mini" src={logo} />
-    </Menu.Item>
-
-    {_.map(leftItems, item => item.dropdown ? 
-      <NavBarDropdown 
-        dropdownItems={item.dropdown}
-        key={item.key}
-        text={item.content}
-        to={item.to}
-      /> 
-      : 
-      <Menu.Item {...item} />)
-    }
-
-    <Menu.Menu position="right">
-      {_.map(rightItems, item => item.dropdown ? 
-        <NavBarDropdown 
-          dropdownItems={item.dropdown}
-          key={item.key}
-          text={item.content}
-          to={item.to}
-        /> 
-        : 
-        <Menu.Item {...item} />)
-      }
-    </Menu.Menu>
-  </Menu>
-);
-
-const NavBarChildren = ({ children }) => (
-  <div>{children}</div>
 );
 
 const AppMedia = createMedia({
@@ -226,7 +127,7 @@ class ResponsiveNavBar extends Component {
                         to={item.to}
                       /> 
                       : 
-                      <Menu.Item {...item} />)
+                      <Menu.Item {...item} />) 
                     }
                 </Menu.Menu>
               </MediaContextProvider>
