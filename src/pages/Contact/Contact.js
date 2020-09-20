@@ -50,6 +50,7 @@ export default class Contact extends Component {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ 
         "form-name": "contact",
+        "bot-field": this.state.botField,
         "name": this.state.name,
         "email": this.state.email,
         "reason": this.state.reason,
@@ -92,6 +93,14 @@ export default class Contact extends Component {
           <p>We are always happy to hear from you, any feedback or questions are appreciated and should receive a response as quickly as possible</p>
 
           <FormContainer success={success} error={error} errorMessage={errorMessage} onSubmit={this.handleSubmit} >
+            <Form.Field
+              className="hidden"
+              label="Don’t fill this out if you're human:"
+              control={Input}
+              name="botField"
+              value={name}
+              onChange={this.handleChange}
+            />
             <Form.Field
               required
               label='Name' 
