@@ -13,7 +13,7 @@ import {
 
 const encode = (data) => {
   return Object.keys(data)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .map(key => data[key] ? encodeURIComponent(key) + "=" + encodeURIComponent(data[key]) : encodeURIComponent(key))
       .join("&");
 }
 
@@ -44,6 +44,15 @@ export default class Contact extends Component {
   handleSubmit = e => {
 
     e.preventDefault();
+
+    console.log(encode({ 
+      "form-name": "contact",
+      "bot-field": this.state.botField,
+      "name": this.state.name,
+      "email": this.state.email,
+      "reason": this.state.reason,
+      "message": this.state.message
+    }));
 
     fetch("/", {
       method: "POST",
