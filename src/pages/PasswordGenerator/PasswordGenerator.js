@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FormContainer, PasswordMessage, DeleteConfirm } from '../../components'
+import { FormContainer, PasswordMessage, DeleteConfirm, ChangeLog } from '../../components'
 import './PasswordGenerator.css'
 import {
   Container,
@@ -45,7 +45,8 @@ export default class PasswordGenerator extends Component {
     this.handleDeleteCancel = this.handleDeleteCancel.bind(this);
   }
 
-  generatePassword() {
+  generatePassword = (e) => {
+    e.preventDefault()
     var password = this.createPassword();
     this.setState({
       password: "test",
@@ -184,6 +185,7 @@ export default class PasswordGenerator extends Component {
               )}
             </div>
           </FormContainer>
+          <ChangeLog />
           <DeleteConfirm 
             open={this.state.deleteConfirmOpen}
             onCancel={this.handleDeleteCancel}

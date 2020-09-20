@@ -1,9 +1,10 @@
-import App from './App/App';
-import NavBar from './NavBar/NavBar';
-import FormContainer from './FormContainer/FormContainer';
-import PasswordMessage from './PasswordMessage/PasswordMessage';
+import App from './App/App'
+import NavBar from './NavBar/NavBar'
+import FormContainer from './FormContainer/FormContainer'
+import PasswordMessage from './PasswordMessage/PasswordMessage'
 import FooterBar from './FooterBar/FooterBar'
 import DeleteConfirm from './DeleteConfirm/DeleteConfirm'
+import ChangeLog from './ChangeLog/ChangeLog'
 
 export {
     App,
@@ -11,5 +12,6 @@ export {
     FooterBar,
     FormContainer,
     PasswordMessage,
-    DeleteConfirm
+    DeleteConfirm,
+    ChangeLog
 };
