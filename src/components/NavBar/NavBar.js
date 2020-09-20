@@ -1,16 +1,16 @@
-import _ from "lodash";
-import React, { Component } from "react";
-import { createMedia } from "@artsy/fresnel";
-import { NavLink, Link } from "react-router-dom";
-import logo from "../../images/mdevz-icon-purple.svg";
+import _ from "lodash"
+import React, { Component } from "react"
+import { createMedia } from "@artsy/fresnel"
+import { NavLink, Link } from "react-router-dom"
+import logo from "../../images/mdevz-icon-purple.svg"
+import { leftItems, rightItems } from '../../config/NavBar'
 import {
   Icon,
   Image,
   Menu,
   Sidebar,
-  Segment ,
   Dropdown
-} from "semantic-ui-react";
+} from "semantic-ui-react"
 import './NavBar.css'
 
 const NavBarDropdown = ({
@@ -41,104 +41,6 @@ const NavBarDropdown = ({
      }
    </Dropdown.Menu>
   </Dropdown>
-);
-
-const NavBarMobile = ({
-  children,
-  leftItems,
-  onPusherClick,
-  onToggle,
-  rightItems,
-  visible
-}) => (
-  <Sidebar.Pushable>
-    <Sidebar
-      as={Menu}
-      animation="overlay"
-      icon="labeled"
-      vertical
-      visible={visible}
-      width='thin'
-    >
-      <Menu.Item
-        as={Link} 
-        to='/'
-        key="home">
-        <Image size="mini" src={logo} />
-        <h4>mDevz Tools</h4>
-      </Menu.Item>
-     {_.map(leftItems, item => item.dropdown ? 
-      <NavBarDropdown 
-        dropdownItems={item.dropdown}
-        key={item.key}
-        text={item.content}
-        to={item.to}
-      /> 
-      : 
-      <Menu.Item {...item} />)
-      }
-    </Sidebar>
-    <Sidebar.Pusher
-      dimmed={visible}
-      onClick={onPusherClick}
-      style={{ minHeight: "100vh" }}
-    >
-      <Menu fixed="top">
-        <Menu.Item
-         as={Link} 
-         to='/'
-         key="home">
-          <Image size="mini" src={logo} />
-        </Menu.Item>
-        <Menu.Item onClick={onToggle}>
-          <Icon name="sidebar" />
-        </Menu.Item>
-        <Menu.Menu position="right">
-          {_.map(rightItems, item => <Menu.Item {...item} />)}
-        </Menu.Menu>
-      </Menu>
-      {children}
-    </Sidebar.Pusher>
-  </Sidebar.Pushable>
-);
-
-const NavBarDesktop = ({ leftItems, rightItems }) => (
-  <Menu fixed="top">
-    <Menu.Item 
-      as={Link} 
-      to='/'
-      key="home">
-      <Image size="mini" src={logo} />
-    </Menu.Item>
-
-    {_.map(leftItems, item => item.dropdown ? 
-      <NavBarDropdown 
-        dropdownItems={item.dropdown}
-        key={item.key}
-        text={item.content}
-        to={item.to}
-      /> 
-      : 
-      <Menu.Item {...item} />)
-    }
-
-    <Menu.Menu position="right">
-      {_.map(rightItems, item => item.dropdown ? 
-        <NavBarDropdown 
-          dropdownItems={item.dropdown}
-          key={item.key}
-          text={item.content}
-          to={item.to}
-        /> 
-        : 
-        <Menu.Item {...item} />)
-      }
-    </Menu.Menu>
-  </Menu>
-);
-
-const NavBarChildren = ({ children }) => (
-  <div>{children}</div>
 );
 
 const AppMedia = createMedia({
@@ -172,46 +74,84 @@ class ResponsiveNavBar extends Component {
       <div>
 
         <style>{mediaStyles}</style>
-        <MediaContextProvider>
-          <Segment.Group>
-            <Segment as={Media} at="mobile">
-              <NavBarMobile
-                leftItems={leftItems}
-                onPusherClick={this.handlePusher}
-                onToggle={this.handleToggle}
-                rightItems={rightItems}
-                visible={visible}
-              >
-                <NavBarChildren>{children}</NavBarChildren>
-              </NavBarMobile>
-            </Segment>
-            <Segment as={Media} greaterThanOrEqual="computer">
-              <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
-              <NavBarChildren>{children}</NavBarChildren>
-            </Segment>
-          </Segment.Group>
-        </MediaContextProvider>
+        <Sidebar.Pushable>
+          <Sidebar
+            as={Menu}
+            animation="overlay"
+            icon="labeled"
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <Menu.Item
+              as={Link} 
+              to='/'
+              key="home">
+              <Image size="mini" src={logo} />
+              <h4>mDevz Tools</h4>
+            </Menu.Item>
+          {_.map(leftItems, item => item.dropdown ? 
+            <NavBarDropdown 
+              dropdownItems={item.dropdown}
+              key={item.key}
+              text={item.content}
+              to={item.to}
+            /> 
+            : 
+            <Menu.Item {...item} />)
+            }
+          </Sidebar>
+          <Sidebar.Pusher
+            dimmed={visible}
+            onClick={this.handlePusher}
+            style={{ minHeight: "100vh" }}
+          >
+            <Menu fixed="top">
+              <Menu.Item
+              as={Link} 
+              to='/'
+              key="home">
+                <Image size="mini" src={logo} />
+              </Menu.Item>
+              <MediaContextProvider>
+                <Menu.Menu as={Media} at="mobile">
+                  <Menu.Item onClick={this.handleToggle}>
+                    <Icon name="sidebar" />
+                  </Menu.Item>
+                </Menu.Menu>
+                <Menu.Menu as={Media} greaterThanOrEqual="computer">
+                  {_.map(leftItems, item => item.dropdown ? 
+                      <NavBarDropdown 
+                        dropdownItems={item.dropdown}
+                        key={item.key}
+                        text={item.content}
+                        to={item.to}
+                      /> 
+                      : 
+                      <Menu.Item {...item} />) 
+                    }
+                </Menu.Menu>
+              </MediaContextProvider>
+              <Menu.Menu position="right">
+                {_.map(rightItems, item => item.dropdown ? 
+                  <NavBarDropdown 
+                    dropdownItems={item.dropdown}
+                    key={item.key}
+                    text={item.content}
+                    to={item.to}
+                  /> 
+                  : 
+                  <Menu.Item {...item} />) 
+                }
+              </Menu.Menu>
+            </Menu>
+            {children}
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
     );
   }
 }
-
-const leftItems = [
-  { as: NavLink, content: "General Tools", to: '/general', key: "security", dropdown: [
-    { as: NavLink, content: "Json Formatter", to: '/jsonformatter', key: "jsongormatter" },
-    { as: NavLink, content: "URL Shortener", to: '/urlshortener', key: "urlshortener" },
-    { as: NavLink, content: "DNS Checker", to: '/dnschecker', key: "dnschecker" },
-  ]},
-  { as: NavLink, content: "Security Tools", to: '/security', key: "security", dropdown: [
-    { as: NavLink, content: 'Password Generator', to: '/passwordgenerator', key: "passwordgenerator" },
-    { as: NavLink, content: 'Security Headers', to: '/securityheaders', key: "securityheaders" }
-  ]},
-  { as: NavLink, content: 'Contact', to: '/contact', key: "contact" }
-];
-const rightItems = [
-  //{ as: NavLink, content: "Login", to: '/login', key: "login" },
-  //{ as: NavLink, content: "Register", to: '/register', key: "register" }
-];
 
 export default class NavMenu extends Component {
 
