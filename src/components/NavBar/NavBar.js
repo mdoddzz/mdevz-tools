@@ -172,25 +172,71 @@ class ResponsiveNavBar extends Component {
       <div>
 
         <style>{mediaStyles}</style>
-        <MediaContextProvider>
-          <Segment.Group>
-            <Segment as={Media} at="mobile">
-              <NavBarMobile
-                leftItems={leftItems}
-                onPusherClick={this.handlePusher}
-                onToggle={this.handleToggle}
-                rightItems={rightItems}
-                visible={visible}
-              >
-                <NavBarChildren>{children}</NavBarChildren>
-              </NavBarMobile>
-            </Segment>
-            <Segment as={Media} greaterThanOrEqual="computer">
-              <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
-              <NavBarChildren>{children}</NavBarChildren>
-            </Segment>
-          </Segment.Group>
-        </MediaContextProvider>
+        <Sidebar.Pushable>
+          <Sidebar
+            as={Menu}
+            animation="overlay"
+            icon="labeled"
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <Menu.Item
+              as={Link} 
+              to='/'
+              key="home">
+              <Image size="mini" src={logo} />
+              <h4>mDevz Tools</h4>
+            </Menu.Item>
+          {_.map(leftItems, item => item.dropdown ? 
+            <NavBarDropdown 
+              dropdownItems={item.dropdown}
+              key={item.key}
+              text={item.content}
+              to={item.to}
+            /> 
+            : 
+            <Menu.Item {...item} />)
+            }
+          </Sidebar>
+          <Sidebar.Pusher
+            dimmed={visible}
+            onClick={this.handlePusher}
+            style={{ minHeight: "100vh" }}
+          >
+            <Menu fixed="top">
+              <Menu.Item
+              as={Link} 
+              to='/'
+              key="home">
+                <Image size="mini" src={logo} />
+              </Menu.Item>
+              <MediaContextProvider>
+                <Menu.Menu as={Media} at="mobile">
+                  <Menu.Item onClick={this.handleToggle}>
+                    <Icon name="sidebar" />
+                  </Menu.Item>
+                </Menu.Menu>
+                <Menu.Menu as={Media} greaterThanOrEqual="computer">
+                  {_.map(leftItems, item => item.dropdown ? 
+                      <NavBarDropdown 
+                        dropdownItems={item.dropdown}
+                        key={item.key}
+                        text={item.content}
+                        to={item.to}
+                      /> 
+                      : 
+                      <Menu.Item {...item} />)
+                    }
+                </Menu.Menu>
+              </MediaContextProvider>
+              <Menu.Menu position="right">
+                {_.map(rightItems, item => <Menu.Item {...item} />)}
+              </Menu.Menu>
+            </Menu>
+            {children}
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
     );
   }
