@@ -30,3 +30,7 @@ h1.ui.header, h2.ui.header, h3.ui.header, h4.ui.header, h5.ui.header {
 .ui.segment {
   color: #4b4b4b;
 }
+
+.hidden {
+  display: none;
+}
