@@ -132,7 +132,16 @@ class ResponsiveNavBar extends Component {
                 </Menu.Menu>
               </MediaContextProvider>
               <Menu.Menu position="right">
-                {_.map(rightItems, item => <Menu.Item {...item} />)}
+                {_.map(rightItems, item => item.dropdown ? 
+                  <NavBarDropdown 
+                    dropdownItems={item.dropdown}
+                    key={item.key}
+                    text={item.content}
+                    to={item.to}
+                  /> 
+                  : 
+                  <Menu.Item {...item} />) 
+                }
               </Menu.Menu>
             </Menu>
             {children}
