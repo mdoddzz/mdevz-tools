@@ -98,7 +98,6 @@ export default class Contact extends Component {
               label="Don’t fill this out if you're human:"
               control={Input}
               name="botField"
-              value={name}
               onChange={this.handleChange}
             />
             <Form.Field
