@@ -13,7 +13,7 @@ import {
 
 const encode = (data) => {
   return Object.keys(data)
-      .map(key => data[key] ? encodeURIComponent(key) + "=" + encodeURIComponent(data[key]) : encodeURIComponent(key))
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
 }
 
@@ -31,7 +31,7 @@ export default class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "", email: "", reason: "", message: "", botField: "",
+      name: "", email: "", reason: "", message: "",
       error: false, errorMessage: "", success: false
     };
 
@@ -45,21 +45,11 @@ export default class Contact extends Component {
 
     e.preventDefault();
 
-    console.log(encode({ 
-      "form-name": "contact",
-      "bot-field": this.state.botField,
-      "name": this.state.name,
-      "email": this.state.email,
-      "reason": this.state.reason,
-      "message": this.state.message
-    }));
-
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ 
         "form-name": "contact",
-        "bot-field": this.state.botField,
         "name": this.state.name,
         "email": this.state.email,
         "reason": this.state.reason,
