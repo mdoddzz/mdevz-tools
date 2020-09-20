@@ -2,6 +2,7 @@ import jsonImage from '../images/homeIcons/jsonformatter.svg'
 import passwordImg from '../images/homeIcons/passwordgenerator.svg'
 import securityImg from '../images/homeIcons/securityheaders.svg'
 import urlImage from '../images/homeIcons/urlshortener.svg'
+import dnsImage from '../images/homeIcons/dnschecker.svg'
 import { Link } from "react-router-dom";
 
 const items = [
@@ -12,7 +13,7 @@ const items = [
         meta: 'v1.2',
         image: jsonImage,
         as: Link,
-        to: "/jsonformatter",
+        to: "/general/jsonformatter",
         color: "teal",
         type: 'General'
     },
@@ -23,7 +24,18 @@ const items = [
         meta: 'v1',
         image: urlImage,
         as: Link,
-        to: "/urlshortener",
+        to: "/general/urlshortener",
+        color: "teal",
+        type: 'General'
+    },
+    {
+        header: 'DNS Checker',
+        description:
+        'Check a hostnames DNS on multiple DNS servers.',
+        meta: 'v1',
+        image: dnsImage,
+        as: Link,
+        to: "/general/dnschecker",
         color: "teal",
         type: 'General'
     },
