@@ -45,7 +45,8 @@ export default class PasswordGenerator extends Component {
     this.handleDeleteCancel = this.handleDeleteCancel.bind(this);
   }
 
-  generatePassword() {
+  generatePassword = (e) => {
+    e.preventDefault()
     var password = this.createPassword();
     this.setState({
       password: "test",
