@@ -16,6 +16,7 @@
   },
   "scripts": {
     "dev": "next",
+    "next": "npm install next",
     "build": "next build",
     "start": "next start"
   },
