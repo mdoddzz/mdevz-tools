@@ -15,9 +15,9 @@
     "semantic-ui-react": "^1.2.1"
   },
   "scripts": {
-    "dev": "npm run-script dev",
-    "build": "npm run-script build",
-    "start": "npm run-script start"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "eslintConfig": {
     "extends": "react-app"
