@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev": "next",
-    "next": "npm install next",
+    "next": "npm i next@9.5.5",
     "build": "next build",
     "start": "next start"
   },
