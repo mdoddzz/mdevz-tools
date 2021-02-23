@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  overflow: auto;
+  background: rgb(32,11,55);
+  background: -moz-linear-gradient(-45deg, rgba(32,11,55,1) 0%, rgba(202,55,130,1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgba(32,11,55,1) 0%,rgba(202,55,130,1) 100%);
+  background: linear-gradient(135deg, rgba(32,11,55,1) 0%,rgba(202,55,130,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#200b37', endColorstr='#ca3782',GradientType=1 );
+  color: #fff;
+  background-attachment: fixed;
+}
+
+h1.ui.header, h2.ui.header, h3.ui.header, h4.ui.header, h5.ui.header {
+  color: #fff;
+}
+
+.ui.segment {
+  color: #4b4b4b;
+}
+
+.hidden {
+  display: none;
+}
+
+/* HOME STYLES */
+.ui.card>.image>img, .ui.cards>.card>.image>img {
+  height: 145px !important;
+}
+
+.ui.segment.active.tab {
+  background-color: transparent;
+  padding: 1px;
+  border: 0px;
+  box-shadow: none;
+}
+
+.ui.segment > .ui.cards > .ui.card {
+  width: calc(33.33333333% - 2em);
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.ui.segment > .ui.cards {
+  margin-left: -1em;
+  margin-right: -1em;
+}
+
+.ui.segment > .ui.cards > .ui.card > .image, .ui.segment > .ui.cards > .ui.cards >.card > .image {
+  padding: 10px;
+}
+
+/* tablets */
+@media only screen and (max-width : 620px) {
+
+  .ui.segment > .ui.cards > .ui.card {
+      width: calc(50% - 2em);
+  }
+}
+
+@media only screen and (max-width : 525px) {
+
+  .ui.segment > .ui.cards > .ui.card {
+      width: 100%;
+  }
+}
+
+
+/* CONTINUE */
