@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import StandardLayout from '../components/StandardLayout/StandardLayout';
+import Link from 'next/link'
 import {
   Container,
   Header,
@@ -39,9 +40,8 @@ const items = [
       'Format json string to how you require',
       meta: 'v1',
       image: '/images/homeIcons/jsonformatter.svg',
-      //as: Link,
       to: "/general/json-formatter",
-      color: "teal",
+      color: "teal" as const,
       type: 'General'
   },
   {
@@ -50,9 +50,8 @@ const items = [
       'Create short urls for when characters are limited or you want a sleeker looking url.',
       meta: 'v1',
       image: '/images/homeIcons/urlshortener.svg',
-      //as: Link,
       to: "/general/url-shortener",
-      color: "teal",
+      color: "teal" as const,
       type: 'General'
   },
   {
@@ -61,9 +60,8 @@ const items = [
       'Check a hostnames DNS on multiple DNS servers.',
       meta: 'v1',
       image: '/images/homeIcons/dnschecker.svg',
-      //as: Link,
       to: "/general/dns-checker",
-      color: "teal",
+      color: "teal" as const,
       type: 'General'
   },
   {
@@ -72,9 +70,8 @@ const items = [
       'Create a secure password with adjustable settings',
       meta: 'v1',
       image: '/images/homeIcons/passwordgenerator.svg',
-      //as: Link,
       to: "/security/password-generator",
-      color: "red",
+      color: "red" as const,
       type: 'Security'
   },
   {
@@ -83,14 +80,21 @@ const items = [
       'Check the security headers of your website and see where security could be improved',
       meta: 'v1',
       image: '/images/homeIcons/securityheaders.svg',
-      //as: Link,
       to: "/security/security-headers",
-      color: "red",
+      color: "red" as const,
       type: 'Security'
   },
 ]
 
-const CardGroup = ({ filter }) => <Card.Group items={filter ? items.filter(item => item.type === filter) : items} />
+const CardGroup = ({ filter }) => (
+  <Card.Group>
+    {items.map(item => filter ? 
+      item.type === filter ? <Link href={item.to}><Card {...item} /></Link> : ''
+      : 
+      <Link href={item.to}><Card {...item} /></Link>)
+    }
+  </Card.Group>
+)
 
 const ToolTabs = () => (
   <Tab 

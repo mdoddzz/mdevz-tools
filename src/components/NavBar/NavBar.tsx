@@ -1,6 +1,7 @@
 import _ from "lodash"
 import React, { Component } from "react"
 import { createMedia } from "@artsy/fresnel"
+import Link from 'next/link'
 import {
   Icon,
   Image,
@@ -19,7 +20,7 @@ const leftItems = [
       { content: 'Password Generator', to: '/password-generator', key: "password-generator" },
       { content: 'Security Headers', to: '/security-headers', key: "security-headers" }
   ]},
-  {  content: 'Contact', to: '/contact', key: "contact" }
+  { content: 'Contact', to: '/contact', key: "contact" }
 ];
 const rightItems = [
   { content: "Login", to: '/login', key: "login" },
@@ -33,21 +34,19 @@ const NavBarDropdown = ({
   to
 }) => (
   <Dropdown 
-    key={id}
+    key={"dropdown_" + id}
     item 
     text={text}
-    exact= {to === '/' ? true : false} 
-    to={to}
     onClick={e => e.preventDefault()}>
    <Dropdown.Menu>
      {
        dropdownItems.map((dropdownItem) => 
-        <Dropdown.Item
-         key={dropdownItem.key}
-         exact= { dropdownItem.to === '/' ? true : false } 
-         to={to + dropdownItem.to}>
-           { dropdownItem.content }
-         </Dropdown.Item>
+        <Link href={to + dropdownItem.to}>
+          <Dropdown.Item
+            key={"dropdown_" + dropdownItem.key}>
+              { dropdownItem.content }
+          </Dropdown.Item>
+        </Link>
       )
      }
    </Dropdown.Menu>
@@ -67,9 +66,7 @@ const { Media, MediaContextProvider } = AppMedia;
 class ResponsiveNavBar extends Component {
 
   state = {
-    visible: false,
-    leftItems: '',
-    rightItems: ''
+    visible: false
   };
 
   handlePusher = () => {
@@ -81,7 +78,7 @@ class ResponsiveNavBar extends Component {
   handleToggle = () => this.setState({ visible: !this.state.visible });
 
   render() {
-    const { children, leftItems, rightItems } = this.props;
+    const { children } = this.props;
     const { visible } = this.state;
 
     return (
@@ -97,22 +94,23 @@ class ResponsiveNavBar extends Component {
             visible={visible}
             width='thin'
           >
-            <Menu.Item
-              to='/'
-              key="home">
-              <Image size="mini" src="/images/mdevz-icon-purple.svg" />
-              <h4>mDevz Tools</h4>
-            </Menu.Item>
+            <Link href='/'>
+              <Menu.Item
+                key="sidebar_home">
+                <Image size="mini" src="/images/mdevz-icon-purple.svg" />
+                <h4>mDevz Tools</h4>
+              </Menu.Item>
+            </Link>
           {_.map(leftItems, item => item.dropdown ? 
             <NavBarDropdown 
               dropdownItems={item.dropdown}
-              id={item.key}
+              id={"sidebar_" + item.key}
               text={item.content}
               to={item.to}
-              key={item.key}
+              key={"sidebar_" + item.key}
             /> 
             : 
-            <Menu.Item {...item} />)
+            <Link href={item.to}><Menu.Item {...item} /></Link>)
             }
           </Sidebar>
           <Sidebar.Pusher
@@ -121,11 +119,12 @@ class ResponsiveNavBar extends Component {
             style={{ minHeight: "100vh" }}
           >
             <Menu fixed="top">
-              <Menu.Item
-              to='/'
-              key="home">
-                <Image size="mini" src="/images/mdevz-icon-purple.svg" />
-              </Menu.Item>
+              <Link href='/'>
+                <Menu.Item
+                key="home">
+                  <Image size="mini" src="/images/mdevz-icon-purple.svg" />
+                </Menu.Item>
+              </Link>
               <MediaContextProvider>
                 <Menu.Menu as={Media} at="mobile">
                   <Menu.Item onClick={this.handleToggle}>
@@ -142,7 +141,7 @@ class ResponsiveNavBar extends Component {
                         key={item.key}
                       /> 
                       : 
-                      <Menu.Item {...item} />) 
+                      <Link href={item.to}><Menu.Item {...item} /></Link>) 
                     }
                 </Menu.Menu>
               </MediaContextProvider>
@@ -156,7 +155,7 @@ class ResponsiveNavBar extends Component {
                     key={item.key}
                   /> 
                   : 
-                  <Menu.Item {...item} />) 
+                  <Link href={item.to}><Menu.Item {...item} /></Link>) 
                 }
               </Menu.Menu>
             </Menu>
@@ -172,7 +171,7 @@ export default class NavMenu extends Component {
 
   render() {
     return (
-      <ResponsiveNavBar leftItems={leftItems} rightItems={rightItems}>
+      <ResponsiveNavBar>
         {this.props.children}
       </ResponsiveNavBar>
     )
