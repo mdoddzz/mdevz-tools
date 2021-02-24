@@ -109,7 +109,7 @@ export default class HomePage extends Component {
         <Container text style={{ marginTop: '7em' }}>
           <Image centered size="medium" src="/images/mdevz-tools-logo-white.svg" />
           <Header as='h1'>About</Header>
-          <p>This is a collection of useful developer/ web tools. Designed to simplify some basic tasks completed as a developer.</p>
+          <p>This is a collection of useful tools for web developers. Designed to simplify some basic tasks completed as a developer.</p>
 
           <Header as='h2'>Tools</Header>
 
