@@ -11,7 +11,6 @@ This is a collection of useful tools for web developers. Designed to simplify so
 * Next.js
 * Typescript
 * Semantic UI
-* Customer server.ts entry point for shared hosting node servers (does have many drawbacks and not recommended deployment method)
 
 ## Running
 *Dev Server*
@@ -24,7 +23,7 @@ npm run dev
 ```sh
 npm i
 npm run build
-npm run start or set "Application Startup File" to "server.ts"
+npm run start
 ```
 
 ## Notes
