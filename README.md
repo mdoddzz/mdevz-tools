@@ -8,9 +8,9 @@ This is a collection of useful tools for web developers. Designed to simplify so
 
 ## Features
 
-* next.js
+* Next.js
 * Typescript
-* Express Custom Server (Only required due to my deployment method)
+* Semantic UI
 
 ## Running
 *Dev Server*
