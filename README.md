@@ -23,7 +23,7 @@ npm run dev
 ```sh
 npm i
 npm run build
-npm run start or set "Application Startup File" to ".next/production-server/server.js"
+npm run start or set "Application Startup File" to "server.js"
 ```
 
 ## Notes
