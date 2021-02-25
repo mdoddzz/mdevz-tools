@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import StandardLayout from '../components/StandardLayout/StandardLayout';
 import Link from 'next/link'
 import {
   Container,
@@ -105,19 +104,16 @@ const ToolTabs = () => (
 export default class HomePage extends Component {
   render() {
     return (
-      <StandardLayout>
-        <Container text style={{ marginTop: '7em' }}>
-          <Image centered size="medium" src="/images/mdevz-tools-logo-white.svg" />
-          <Header as='h1'>About</Header>
-          <p>This is a collection of useful tools for web developers. Designed to simplify some basic tasks completed as a developer.</p>
+      <Container text style={{ marginTop: '7em' }}>
+        <Image centered size="medium" src="/images/mdevz-tools-logo-white.svg" />
+        <Header as='h1'>About</Header>
+        <p>This is a collection of useful tools for web developers. Designed to simplify some basic tasks completed as a developer.</p>
 
-          <Header as='h2'>Tools</Header>
+        <Header as='h2'>Tools</Header>
 
-          <ToolTabs />
+        <ToolTabs />
 
-        </Container>
-    
-      </StandardLayout>
+      </Container>
     )
   }
 }

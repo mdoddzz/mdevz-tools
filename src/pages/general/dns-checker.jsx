@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import StandardLayout from '../../components/StandardLayout/StandardLayout';
 import {
   Container,
   Header,
@@ -58,58 +57,56 @@ export default class DnsChecker extends Component {
   render() {
     const {scanning, dns, error} = this.state
     return (
-        <StandardLayout>
-            <Container text style={{ marginTop: '7em' }}>
-                <Header as='h1'>DNS Checker</Header>
+        <Container text style={{ marginTop: '7em' }}>
+            <Header as='h1'>DNS Checker</Header>
 
-                <p>This page is used to check your website dns.</p>
+            <p>This page is used to check your website dns.</p>
 
-                <Container textAlign='center'>
-                    <Input 
-                    error={error ? true : false}
-                    action={{
-                        color: 'teal',
-                        content: scanning ? 'Scanning...' : 'Scan',
-                        onClick: this.checkDns
-                    }} 
-                    name="site"
-                    onChange={this.handleChange}
-                    placeholder='Enter Site...' 
-                    />
-                </Container>
-
-                <Message 
-                    error 
-                    hidden={error ? false : true}
-                    header="Error!"
-                    content={error ? error.message : 'Unexpected Error'}
+            <Container textAlign='center'>
+                <Input 
+                error={error ? true : false}
+                action={{
+                    color: 'teal',
+                    content: scanning ? 'Scanning...' : 'Scan',
+                    onClick: this.checkDns
+                }} 
+                name="site"
+                onChange={this.handleChange}
+                placeholder='Enter Site...' 
                 />
-
-                <Segment hidden={dns ? false : true} basic>
-            
-                    <Header as='h2'>Results</Header>
-
-                    <Table celled striped className="headerTable">
-                    <Table.Header>
-                        <Table.Row>
-                        <Table.HeaderCell colSpan='2'>DNS</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
-                        {dns && dns.map((item, i) => (
-                        <Table.Row key={i}>
-                            <Table.Cell style={{ fontWeight: 'bold' }} >{item.type}</Table.Cell>
-                            <Table.Cell>{item.value}</Table.Cell>
-                        </Table.Row>
-                        ))}
-                    </Table.Body>
-                    </Table>
-
-                </Segment>
-                
             </Container>
-        </StandardLayout>
+
+            <Message 
+                error 
+                hidden={error ? false : true}
+                header="Error!"
+                content={error ? error.message : 'Unexpected Error'}
+            />
+
+            <Segment hidden={dns ? false : true} basic>
+        
+                <Header as='h2'>Results</Header>
+
+                <Table celled striped className="headerTable">
+                <Table.Header>
+                    <Table.Row>
+                    <Table.HeaderCell colSpan='2'>DNS</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                    {dns && dns.map((item, i) => (
+                    <Table.Row key={i}>
+                        <Table.Cell style={{ fontWeight: 'bold' }} >{item.type}</Table.Cell>
+                        <Table.Cell>{item.value}</Table.Cell>
+                    </Table.Row>
+                    ))}
+                </Table.Body>
+                </Table>
+
+            </Segment>
+            
+        </Container>
     )
   }
 }

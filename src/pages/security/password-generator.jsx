@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import StandardLayout from '../../components/StandardLayout/StandardLayout';
 import FormContainer from '../../components/FormContainer/FormContainer';
 import PasswordMessage from '../../components/PasswordMessage/PasswordMessage';
 import DeleteConfirm from '../../components/DeleteConfirm/DeleteConfirm';
@@ -130,72 +129,70 @@ export default class PasswordGenerator extends Component {
     var passwordList = this.state.passwordList
 
     return (
-        <StandardLayout>
-            <Container text style={{ marginTop: '7em' }}>
-                <h1>Password Generator</h1>
+      <Container text style={{ marginTop: '7em' }}>
+          <h1>Password Generator</h1>
 
-                <p>Make sure to include warning for insecure passwords and maybe a strength indicator</p>
-                <FormContainer>
-                    <Form.Field inline>
-                    <label>Number of Characters</label>
-                    <div>
-                        <Dropdown placeholder="Select" selection defaultValue={this.state.passwordLength} options={this.state.options} onChange={this.handleChange("passwordLength")}></Dropdown>
-                    </div>
-                    </Form.Field>      
-                    <Form.Field inline>
-                    <label>Include Lowercase Characters</label>
-                    <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableLowercase")} />
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Include Uppercase Characters</label>
-                    <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableUppercase")} />
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Include Numbers</label>
-                    <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Include Special Characters</label>
-                    <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Include Similar Characters</label>
-                    <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange('enableSimilar')} />
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Hide Password on Generate</label>
-                    <Checkbox toggle onChange={this.handleCheckboxChange('hidePassword')} />
-                    </Form.Field>
-                    <Form.Field inline>
-                    <label>Copy to Clipboard on Generate</label>
-                    <Checkbox toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
-                    </Form.Field>
-                    <Button 
-                        onClick={this.generatePassword}
-                        floated='right'
-                        primary
-                        >
-                        Generate Password
-                    </Button>
-                    <Divider clearing hidden />
-                    <div className="passwordList">
-                    {[...passwordList].map((password, index) => 
-                        <PasswordMessage 
-                        parent={this}
-                        password={password} 
-                        copyToClipboard={(index === passwordList.length - 1 && this.state.copyToClipboard) ? true : false}
-                        />
-                    )}
-                    </div>
-                </FormContainer>
-                <DeleteConfirm 
-                    open={this.state.deleteConfirmOpen}
-                    onCancel={this.handleDeleteCancel}
-                    onConfirm={this.handleDeleteConfirm}
-                    content="Are you sure you want to delete this password? It will not be recoverable."
-                />
-            </Container>
-        </StandardLayout>
+          <p>Make sure to include warning for insecure passwords and maybe a strength indicator</p>
+          <FormContainer>
+              <Form.Field inline>
+              <label>Number of Characters</label>
+              <div>
+                  <Dropdown placeholder="Select" selection defaultValue={this.state.passwordLength} options={this.state.options} onChange={this.handleChange("passwordLength")}></Dropdown>
+              </div>
+              </Form.Field>      
+              <Form.Field inline>
+              <label>Include Lowercase Characters</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableLowercase")} />
+              </Form.Field>
+              <Form.Field inline>
+              <label>Include Uppercase Characters</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableUppercase")} />
+              </Form.Field>
+              <Form.Field inline>
+              <label>Include Numbers</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableNumbers")}></Checkbox>
+              </Form.Field>
+              <Form.Field inline>
+              <label>Include Special Characters</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange("enableSymbols")}></Checkbox>
+              </Form.Field>
+              <Form.Field inline>
+              <label>Include Similar Characters</label>
+              <Checkbox defaultChecked toggle onChange={this.handleCheckboxChange('enableSimilar')} />
+              </Form.Field>
+              <Form.Field inline>
+              <label>Hide Password on Generate</label>
+              <Checkbox toggle onChange={this.handleCheckboxChange('hidePassword')} />
+              </Form.Field>
+              <Form.Field inline>
+              <label>Copy to Clipboard on Generate</label>
+              <Checkbox toggle onChange={this.handleCheckboxChange('copyToClipboard')} />
+              </Form.Field>
+              <Button 
+                  onClick={this.generatePassword}
+                  floated='right'
+                  primary
+                  >
+                  Generate Password
+              </Button>
+              <Divider clearing hidden />
+              <div className="passwordList">
+              {[...passwordList].map((password, index) => 
+                  <PasswordMessage 
+                  parent={this}
+                  password={password} 
+                  copyToClipboard={(index === passwordList.length - 1 && this.state.copyToClipboard) ? true : false}
+                  />
+              )}
+              </div>
+          </FormContainer>
+          <DeleteConfirm 
+              open={this.state.deleteConfirmOpen}
+              onCancel={this.handleDeleteCancel}
+              onConfirm={this.handleDeleteConfirm}
+              content="Are you sure you want to delete this password? It will not be recoverable."
+          />
+      </Container>
     )
   }
 }
